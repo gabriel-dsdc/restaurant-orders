@@ -16,15 +16,15 @@ def analyze_log(path_to_file: str) -> None:
 
     try:
         with open(path_to_file, mode="r") as file:
-            csv_reader2 = csv.DictReader(
+            csv_reader = csv.DictReader(
                 file, fieldnames=["client", "order", "weekday"]
             )
-            orders = list(csv_reader2)
+            orders = list(csv_reader)
 
             most_ordered = Counter(
                 [row["order"] for row in orders if row["client"] == "maria"]
             ).most_common(1)[0][0]
-            hamburguer_times = len(
+            hamburger_times = len(
                 [
                     row
                     for row in orders
@@ -40,7 +40,7 @@ def analyze_log(path_to_file: str) -> None:
                     line + "\n"
                     for line in [
                         most_ordered,
-                        str(hamburguer_times),
+                        str(hamburger_times),
                         str(never_ordered),
                         str(never_weekdays),
                     ]
